@@ -3,27 +3,15 @@ package com.example.amazingindicator;
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
-
 import android.graphics.Paint;
 import android.graphics.PointF;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.Window;
-
-
-///
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
-
-
-
-
-
 import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.ItemTouchHelper;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +30,7 @@ public class CircleNavigator extends View implements IPageNavigator {
 
     //指示器（可移动的那个实心圆）的当前position
     public int mCurIndex = 0;
-    //指示器的当前横坐标的值
+    //当前指示器的横坐标的值
     public float mCurIndicatorX;
 
     //是否跟随手指移动，这里我也是由外部来控制是否跟随
@@ -95,8 +83,9 @@ public class CircleNavigator extends View implements IPageNavigator {
                 break;
             case MeasureSpec.AT_MOST:
             case MeasureSpec.UNSPECIFIED:
-                realWidth = 2 * circleRadius * circleCount + (circleCount - 1) * horizontalSpacing + 2 * strokeWidth + getPaddingLeft()
+                realWidth = 2 * circleRadius * circleCount + (circleCount - 1) * horizontalSpacing + 2 * strokeWidth  * circleCount+ getPaddingLeft()
                         + getPaddingRight();
+                Log.d(TAG, "getMeasureWidth: " + "PaddingLeft: " + getPaddingLeft() + "PaddingRight: " + getPaddingRight());
                 break;
             default:
                 break;
@@ -133,8 +122,9 @@ public class CircleNavigator extends View implements IPageNavigator {
      * 准备好圆心的坐标
      */
     private void preparePoints() {
-        int width = getPaddingRight() + strokeWidth + circleRadius;
-        int spacing = 2 * circleRadius + horizontalSpacing;
+        int width = getPaddingLeft() + strokeWidth + circleRadius;
+        Log.d(TAG, "preparePoints: " + "getPaddingLeft:  " + getPaddingLeft());
+        int spacing = 2 * circleRadius + horizontalSpacing + 2 * strokeWidth;
         int height = (int) (getHeight() / 2 + 0.5f);
         for (int i = 0; i < circleCount; i++) {
             PointF pointF = new PointF(width, height);
@@ -168,6 +158,10 @@ public class CircleNavigator extends View implements IPageNavigator {
         }
     }
 
+    /**
+     * 画的是那个可移动的那个实心圆
+     * @param canvas
+     */
     private void drawIndicator(Canvas canvas) {
         int height = (int) (getHeight() / 2 + 0.5f);
         mPaint.setStyle(Paint.Style.FILL);

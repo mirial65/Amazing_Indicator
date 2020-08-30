@@ -6,10 +6,11 @@ import androidx.viewpager.widget.ViewPager;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.RadioGroup;
 
-import java.lang.reflect.Array;
+
+
+import com.google.android.material.tabs.TabLayout;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class MainActivity extends AppCompatActivity {
     private List<String> mList = Arrays.asList(CHANNELS);
     private ViewPager mViewPager;
     private MagicIndicator mMagicIndicator;
+    private TabLayout mTableLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

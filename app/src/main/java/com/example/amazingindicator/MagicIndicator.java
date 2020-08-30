@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.Px;
 
+/**
+ * 对框架MagicIndicator的部分 解读
+ */
 public class MagicIndicator extends FrameLayout {
     public IPageNavigator mNavigator;
     public MagicIndicator(@NonNull Context context) {
@@ -41,6 +44,7 @@ public class MagicIndicator extends FrameLayout {
     }
 
     public void setNavigator(IPageNavigator navigator) {
+        //先删除再添加
         removeAllViews();
         mNavigator = navigator;
         if (mNavigator instanceof View) {
